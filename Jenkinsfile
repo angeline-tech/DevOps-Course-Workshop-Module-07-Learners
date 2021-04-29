@@ -7,23 +7,28 @@ pipeline {
                     image 'node:14-alpine'
                 }
             }
-            dir("DotnetTemplate.Web"){
-                    stage("Check npm is installed"){
-                        steps{
-                            sh 'npm --v'
-                        }
-                    }
-                    stage("Install Dependencies"){
-                        steps{
-                            sh 'npm install'
-                        }
-                    }
-                    stage("Test"){
-                        steps{
-                            sh 'npm t'
-                        }
+            stage("Check npm is installed"){
+                dir("DotnetTemplate.Web"){
+                    steps{
+                        sh 'npm --v'
                     }
                 }
+            }
+            stage("Install Dependencies"){
+                dir("DotnetTemplate.Web"){
+                    steps{
+                        sh 'npm install'
+                    }
+                }
+            }
+            stage("Test"){
+                dir("DotnetTemplate.Web"){
+                    steps{
+                        sh 'npm t'
+                    }
+                }
+            }
+                
         }
         stage('Build & Test dotnet') {
             environment {
