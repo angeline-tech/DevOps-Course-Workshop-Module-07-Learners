@@ -7,14 +7,23 @@ pipeline {
                     image 'node:14-alpine'
                 }
             }
-
-            steps {
-                dir("DotnetTemplate.Web"){
-                    sh 'npm --v'
-                    sh 'npm install'
-                    sh 'npm t'
+            dir("DotnetTemplate.Web"){
+                    stage("Check npm is installed"){
+                        steps{
+                            sh 'npm --v'
+                        }
+                    }
+                    stage("Install Dependencies"){
+                        steps{
+                            sh 'npm install'
+                        }
+                    }
+                    stage("Test"){
+                        steps{
+                            sh 'npm t'
+                        }
+                    }
                 }
-            }
         }
         stage('Build & Test dotnet') {
             environment {
@@ -25,10 +34,20 @@ pipeline {
                     image 'mcr.microsoft.com/dotnet/sdk:5.0'
                 }
             }
-            steps {
-                sh 'dotnet --list-sdks'
-                sh 'dotnet build'
-                sh 'dotnet test'
+            stage("Check dotnet is installed"){
+                steps{
+                    sh 'dotnet --list-sdks'
+                }
+            }            
+            stage("Build"){
+                steps{
+                    sh 'dotnet build'
+                }
+            }            
+            stage("Test"){
+                steps{
+                    sh 'dotnet test'
+                }
             }
         }
     }
