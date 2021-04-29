@@ -6,7 +6,7 @@ jobs:
     name: Build and test
     strategy:
       matrix:
-        dotnet: [ '2.1.x', '3.1.x', '5.0.x' ]
+        dotnet: [ '5.0.x' ]
         node: ['10', '12']
     runs-on: ubuntu-latest 
     steps:
