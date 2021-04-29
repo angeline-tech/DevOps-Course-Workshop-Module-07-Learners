@@ -2,19 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build & Test Node') {
+             agent {
+                docker {
+                    image 'node:14-alpine'
+                }
+            }
             steps {
-                echo 'Building..'
+                npm --v
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+        stage('Build & Test dotnet') {
+
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/dotnet/sdk:5.0'
+                }
             }
-        }
-        stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                dotnet --list-sdks
             }
         }
     }
