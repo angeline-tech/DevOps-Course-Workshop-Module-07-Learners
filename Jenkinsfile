@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-
+    agent none
     stages {
         stage('Build & Test Node') {
              agent {
@@ -9,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                npm --v
+                sh 'npm --v'
             }
         }
         stage('Build & Test dotnet') {
@@ -20,7 +19,7 @@ pipeline {
                 }
             }
             steps {
-                dotnet --list-sdks
+                sh 'dotnet --list-sdks'
             }
         }
     }
