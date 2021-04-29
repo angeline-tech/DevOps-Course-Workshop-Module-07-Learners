@@ -20,5 +20,5 @@ jobs:
     - name: npm install
       run: cd DotnetTemplate.Web && npm install
 
-    - name: Where Am I?
-      run: pwd
+    - name: Linter
+      run: cd DotnetTemplate.Web && npm run lint
