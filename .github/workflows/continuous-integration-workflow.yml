@@ -16,3 +16,9 @@ jobs:
 
     - name: Test C# code
       run: dotnet test
+
+    - name: npm install
+      run: cd DotnetTemplate.Web && npm install
+
+    - name: Where Am I?
+      run: pwd
