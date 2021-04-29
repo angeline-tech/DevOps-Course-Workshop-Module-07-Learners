@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage('Build & Test Node') {
+        stage('spin up node agent') {
              agent {
                 docker {
                     image 'node:14-alpine'
@@ -15,14 +15,14 @@ pipeline {
                         }
                     }
                 }
-                stage("Install Dependencies"){
+                stage("Install npm dependencies"){
                     steps{
                         dir("DotnetTemplate.Web"){
                             sh 'npm install'
                         }
                     }
                 }
-                stage("Test"){
+                stage("npm test"){
                     steps{
                         dir("DotnetTemplate.Web"){
                             sh 'npm t'
@@ -32,7 +32,7 @@ pipeline {
             }
 
         }
-        stage('Build & Test dotnet') {
+        stage('spinup dotnet agent') {
             environment {
                 DOTNET_CLI_HOME = '/tmp/dotnet_cli_home'
             }
@@ -47,12 +47,12 @@ pipeline {
                         sh 'dotnet --list-sdks'
                     }
                 }            
-                stage("Build"){
+                stage("dotnet build"){
                     steps{
                         sh 'dotnet build'
                     }
                 }            
-                stage("Test"){
+                stage("dotnet test"){
                     steps{
                         sh 'dotnet test'
                     }
