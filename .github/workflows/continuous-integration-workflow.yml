@@ -11,5 +11,8 @@ jobs:
     - name: Where Am I?
       run: pwd
     
-    - name: Run dotnet build
+    - name: Build C# code
       run: dotnet build
+
+    - name: Test C# code
+      run: dotnet test
