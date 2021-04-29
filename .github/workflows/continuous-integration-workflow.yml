@@ -4,12 +4,23 @@ on: [push] # Will make the workflow run every time you push to any branch
 jobs:
   build:
     name: Build and test
-    runs-on: ubuntu-latest # Sets the build environment a machine with the latest Ubuntu installed
+    strategy:
+      matrix:
+        dotnet: [ '2.1.x', '3.1.x', '5.0.x' ]
+        node: ['10', '12']
+    runs-on: ubuntu-latest 
     steps:
-      - uses: actions/checkout@v2 # Adds a step to checkout the repository code
+      - uses: actions/checkout@v2 
+    
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+          with:
+              dotnet-version: ${{ matrix.dotnet }}
 
-      - name: Where Am I?
-        run: pwd
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Build C# code
         run: dotnet build
