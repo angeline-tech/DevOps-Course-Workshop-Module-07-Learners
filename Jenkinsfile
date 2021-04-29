@@ -10,7 +10,8 @@ pipeline {
             steps {
                 dir("DotnetTemplate.Web"){
                     sh 'npm --v'
-                    sh 'pwd'
+                    sh 'npm install'
+                    sh 'npm t'
                 }
             }
         }
@@ -23,7 +24,8 @@ pipeline {
             }
             steps {
                 sh 'dotnet --list-sdks'
-                sh 'pwd'
+                sh 'dotnet build'
+                sh 'dotnet test'
             }
         }
     }
