@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
         uses: docker/login-action@v1 
@@ -57,7 +57,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: user/app:latest
+          tags:
+          - angeline23/devops:"${{steps.vars.outputs.sha_short}}"
+          - angeline23/devops:latest
       -name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       

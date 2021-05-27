@@ -2,3 +2,6 @@
 Jenkinsfile
 *.json
 .github
+DotnetTemplate.Web/node_modules
+Dockerfile
+JenkinsDockerfile
