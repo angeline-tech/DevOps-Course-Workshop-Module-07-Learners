@@ -57,7 +57,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: dotnet_template:latest
+          tags: angeline23/dotnet_template:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       
