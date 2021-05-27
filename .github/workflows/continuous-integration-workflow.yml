@@ -61,4 +61,11 @@ jobs:
           tags: angeline23/dotnet_template:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+  heroku: 
+    name: Push and Release to Heroku
+    steps:
+      - name: Login to Heroku Container Registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
       
