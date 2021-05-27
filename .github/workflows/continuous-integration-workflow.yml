@@ -69,4 +69,16 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
+      - name: Create new Heroku Tag
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: docker tag angeline23/dotnet_template:latest registry.heroku.com/dotnet-template-23/web
+      - name: Push to Heroku Registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: docker push registry.heroku.com/dotnet-template-23/web
+      - name: Release to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web --app dotnet-template-23
       
