@@ -60,6 +60,6 @@ jobs:
           tags:
             - angeline23/devops:${{steps.vars.outputs.sha_short}}
             - angeline23/devops:latest
-      -name: Image digest
+      - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       
