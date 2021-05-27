@@ -71,6 +71,10 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
+      - name: Pull the image from DockerHub
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: docker pull angeline23/dotnet_template:latest 
       - name: Create new Heroku Tag
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
