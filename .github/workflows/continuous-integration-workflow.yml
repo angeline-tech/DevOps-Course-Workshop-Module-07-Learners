@@ -57,9 +57,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:
-            - angeline23/devops:${{steps.vars.outputs.sha_short}}
-            - angeline23/devops:latest
+          tags: angeline23/devops:${{steps.vars.outputs.sha_short}}, angeline23/devops:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       
